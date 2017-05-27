@@ -1,0 +1,40 @@
+{
+  "name": "Ultimate",
+  "description": "Play ultimate frisbee in the browser!",
+  "author": "Jon Cass",
+  "license": "MIT",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/joncass/ultimate"
+  },
+  "engines": {
+    "node": "4.3.0"
+  },
+  "main": "main.js",
+  "dependencies": {
+    "browserify": "^13.0.1",
+    "express": "^4.14.0",
+    "lance-gg": "~1.0.0",
+    "query-string": "^4.2.3",
+    "socket.io": "^1.4.8"
+  },
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "eslint": "^3.16.1",
+    "eslint-config-google": "^0.7.1",
+    "watchify": "^3.7.0"
+  },
+  "scripts": {
+    "start": "node main.js",
+    "postinstall": "browserify src/client/clientMain.js -i nodejs-physijs -o dist/bundle.js ",
+    "build": "browserify src/client/clientMain.js -i nodejs-physijs -o dist/bundle.js ",
+    "watchify": "watchify src/client/clientMain.js -i nodejs-physijs -o dist/bundle.js -v -d",
+    "test": "yarn lint && yarn unit",
+    "lint": "eslint src && echo Congratulations! You are lint-free!",
+    "unit": "echo No unit tests have been written"
+  },
+  "browserify": {
+    "transform": ["babelify"]
+  }
+}
