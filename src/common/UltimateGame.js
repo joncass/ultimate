@@ -61,16 +61,28 @@ class UltimateGame extends GameEngine {
     // get the player paddle tied to the player socket
     const player = this.world.getPlayerObject(playerId);
     if (player) {
-      if (inputData.input === 'up') {
+      if (
+        inputData.input === 'up'
+        && player.position.y > 0
+      ) {
         player.position.y -= MOVEMENT_STEP;
       }
-      else if (inputData.input === 'down') {
+      else if (
+        inputData.input === 'down'
+        && player.position.y < HEIGHT - PADDLE_HEIGHT
+      ) {
         player.position.y += MOVEMENT_STEP;
       }
-      else if (inputData.input === 'right') {
+      else if (
+        inputData.input === 'right'
+        && player.position.x < WIDTH - PADDLE_WIDTH
+      ) {
         player.position.x += MOVEMENT_STEP;
       }
-      else if (inputData.input === 'left') {
+      else if (
+        inputData.input === 'left'
+        && player.position.x > PADDLE_WIDTH
+      ) {
         player.position.x -= MOVEMENT_STEP;
       }
     }
