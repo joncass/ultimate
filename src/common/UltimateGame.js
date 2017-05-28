@@ -2,8 +2,8 @@
 
 const GameEngine = require('lance-gg').GameEngine;
 
-const Paddle = require('./Paddle');
-const Ball = require('./Ball');
+const Player = require('./Player');
+const Disc = require('./Disc');
 const MOVEMENT_STEP = 5;
 const PADDING = 20;
 const WIDTH = 800;
@@ -20,17 +20,17 @@ class UltimateGame extends GameEngine {
     super.start();
 
     this.on('postStep', () => {
-      this.postStepHandleBall();
+      this.postStepHandleDisc();
     });
 
     this.on('objectAdded', (object) => {
-      if (object.id == 1 && object.class == Paddle) {
+      if (object.id == 1 && object.class == Player) {
         this.paddle1 = object;
       }
-      else if (object.id == 2 && object.class == Paddle) {
+      else if (object.id == 2 && object.class == Player) {
         this.paddle2 = object;
       }
-      else if (object.class == Ball) {
+      else if (object.class == Disc) {
         this.ball = object;
       }
       else {
@@ -40,38 +40,44 @@ class UltimateGame extends GameEngine {
   }
   initGame() {
     this.addObjectToWorld(
-      new Paddle(++this.world.idCount, PADDING, 1)
+      new Player(++this.world.idCount, PADDING, 1)
     );
     this.addObjectToWorld(
-      new Paddle(++this.world.idCount, WIDTH - PADDING, 2)
+      new Player(++this.world.idCount, WIDTH - PADDING, 2)
     );
     this.addObjectToWorld(
-      new Ball(++this.world.idCount, WIDTH / 2, HEIGHT / 2)
+      new Disc(++this.world.idCount, WIDTH / 2, HEIGHT / 2)
     );
   }
 
   registerClasses(serializer) {
-    serializer.registerClass(require('./Paddle'));
-    serializer.registerClass(require('./Ball'));
+    serializer.registerClass(require('./Player'));
+    serializer.registerClass(require('./Disc'));
   }
 
   processInput(inputData, playerId) {
     super.processInput(inputData, playerId);
 
     // get the player paddle tied to the player socket
-    const playerPaddle = this.world.getPlayerObject(playerId);
-    if (playerPaddle) {
+    const player = this.world.getPlayerObject(playerId);
+    if (player) {
       if (inputData.input === 'up') {
-        playerPaddle.position.y -= MOVEMENT_STEP;
+        player.position.y -= MOVEMENT_STEP;
       }
       else if (inputData.input === 'down') {
-        playerPaddle.position.y += MOVEMENT_STEP;
+        player.position.y += MOVEMENT_STEP;
+      }
+      else if (inputData.input === 'right') {
+        player.position.x += MOVEMENT_STEP;
+      }
+      else if (inputData.input === 'left') {
+        player.position.x -= MOVEMENT_STEP;
       }
     }
   }
 
 
-  postStepHandleBall() {
+  postStepHandleDisc() {
     if (!this.ball) {
       return;
     }

@@ -2,7 +2,7 @@
 
 const DynamicObject = require('lance-gg').serialize.DynamicObject;
 
-class Ball extends DynamicObject {
+class Disc extends DynamicObject {
   get bendingMultiple() {
     return 0.8;
   }
@@ -13,7 +13,7 @@ class Ball extends DynamicObject {
   constructor(id, x, y) {
     super(id);
     this.position.set(x, y);
-    this.class = Ball;
+    this.class = Disc;
     this.velocity.set(2, 2);
   }
 
@@ -24,4 +24,4 @@ class Ball extends DynamicObject {
   }
 }
 
-module.exports = Ball;
+module.exports = Disc;

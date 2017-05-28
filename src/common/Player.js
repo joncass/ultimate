@@ -2,12 +2,12 @@
 
 const DynamicObject = require('lance-gg').serialize.DynamicObject;
 
-class Paddle extends DynamicObject {
+class Player extends DynamicObject {
   constructor(id, x, playerId) {
     super(id);
     this.position.set(x, 0);
     this.playerId = playerId;
-    this.class = Paddle;
+    this.class = Player;
   }
 
   onAddToWorld(gameEngine) {
@@ -17,4 +17,4 @@ class Paddle extends DynamicObject {
   }
 }
 
-module.exports = Paddle;
+module.exports = Player;
