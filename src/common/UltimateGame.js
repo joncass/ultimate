@@ -6,8 +6,8 @@ const Paddle = require('./Paddle');
 const Ball = require('./Ball');
 const MOVEMENT_STEP = 5;
 const PADDING = 20;
-const WIDTH = 400;
-const HEIGHT = 400;
+const WIDTH = 800;
+const HEIGHT = 500;
 const PADDLE_WIDTH = 10;
 const PADDLE_HEIGHT = 50;
 
