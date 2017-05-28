@@ -1,9 +1,9 @@
 const ClientEngine = require('lance-gg').ClientEngine;
-const MyRenderer = require('../client/MyRenderer');
+const UltimateRenderer = require('../client/UltimateRenderer');
 
-class MyClientEngine extends ClientEngine {
+class UltimateClient extends ClientEngine {
   constructor(gameEngine, options) {
-    super(gameEngine, options, MyRenderer);
+    super(gameEngine, options, UltimateRenderer);
     const engine = this;
 
     engine.serializer.registerClass(require('../common/PlayerAvatar'));
@@ -70,4 +70,4 @@ class MyClientEngine extends ClientEngine {
   }
 }
 
-module.exports = MyClientEngine;
+module.exports = UltimateClient;

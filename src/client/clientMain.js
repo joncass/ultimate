@@ -1,6 +1,6 @@
 const qsOptions = require('query-string').parse(location.search);
-const MyClientEngine = require('../client/MyClientEngine');
-const MyGameEngine = require('../common/MyGameEngine');
+const UltimateClient = require('../client/UltimateClient');
+const UltimateGame = require('../common/UltimateGame');
 const SimplePhysicsEngine = require('lance-gg').physics.SimplePhysicsEngine;
 
 // default options, overwritten by query-string options
@@ -24,8 +24,8 @@ if (options.syncOptions.sync === 'extrapolate') {
 }
 
 // create a client engine and a game engine
-const gameEngine = new MyGameEngine(options);
-const clientEngine = new MyClientEngine(gameEngine, options);
+const gameEngine = new UltimateGame(options);
+const clientEngine = new UltimateClient(gameEngine, options);
 
 document.addEventListener('DOMContentLoaded', function(e) {
   clientEngine.start();

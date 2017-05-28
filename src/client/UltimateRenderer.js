@@ -2,7 +2,7 @@
 
 const Renderer = require('lance-gg').render.Renderer;
 
-class MyRenderer extends Renderer {
+class UltimateRenderer extends Renderer {
 
   constructor(gameEngine, clientEngine) {
     super(gameEngine, clientEngine);
@@ -34,4 +34,4 @@ class MyRenderer extends Renderer {
   }
 }
 
-module.exports = MyRenderer;
+module.exports = UltimateRenderer;

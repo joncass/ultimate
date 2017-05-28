@@ -11,7 +11,7 @@ const HEIGHT = 400;
 const PADDLE_WIDTH = 10;
 const PADDLE_HEIGHT = 50;
 
-class MyGameEngine extends GameEngine {
+class UltimateGame extends GameEngine {
   constructor(options) {
     super(options);
   }
@@ -126,4 +126,4 @@ class MyGameEngine extends GameEngine {
 
 }
 
-module.exports = MyGameEngine;
+module.exports = UltimateGame;

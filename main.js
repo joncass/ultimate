@@ -17,14 +17,14 @@ const requestHandler = server.listen(PORT, () => console.log(`Listening on ${ PO
 const io = socketIO(requestHandler);
 
 // Game Server
-const MyServerEngine = require(path.join(__dirname, 'src/server/MyServerEngine.js'));
-const MyGameEngine = require(path.join(__dirname, 'src/common/MyGameEngine.js'));
+const UltimateServer = require(path.join(__dirname, 'src/server/UltimateServer.js'));
+const UltimateGame = require(path.join(__dirname, 'src/common/UltimateGame.js'));
 const SimplePhysicsEngine = require('lance-gg').physics.SimplePhysicsEngine;
 
 // Game Instances
 const physicsEngine = new SimplePhysicsEngine();
-const gameEngine = new MyGameEngine({ physicsEngine, traceLevel: 1 });
-const serverEngine = new MyServerEngine(io, gameEngine, { debug: {}, updateRate: 6 });
+const gameEngine = new UltimateGame({ physicsEngine, traceLevel: 1 });
+const serverEngine = new UltimateServer(io, gameEngine, { debug: {}, updateRate: 6 });
 
 // start the game
 serverEngine.start();
