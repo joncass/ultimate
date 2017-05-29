@@ -21,14 +21,14 @@ class MyServerEngine extends ServerEngine {
   onPlayerConnected(socket) {
     super.onPlayerConnected(socket);
 
-    // attach newly connected player an available paddle
+    // attach newly connected player
     if (!this.players.player1) {
       this.players.player1 = socket.id;
-      this.gameEngine.paddle1.playerId = socket.playerId;
+      this.gameEngine.player1.playerId = socket.playerId;
     }
     else if (!this.players.player2) {
       this.players.player2 = socket.id;
-      this.gameEngine.paddle2.playerId = socket.playerId;
+      this.gameEngine.player2.playerId = socket.playerId;
     }
   }
 

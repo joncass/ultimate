@@ -24,7 +24,7 @@ class UltimateRenderer extends Renderer {
   }
 
   addSprite(obj, objName) {
-    if (objName === 'paddle') {
+    if (objName === 'player') {
       objName += obj.id;
     }
 

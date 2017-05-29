@@ -19,7 +19,7 @@ class Disc extends DynamicObject {
 
   onAddToWorld(gameEngine) {
     if (gameEngine.renderer) {
-      gameEngine.renderer.addSprite(this, 'ball');
+      gameEngine.renderer.addSprite(this, 'disc');
     }
   }
 }

@@ -8,8 +8,8 @@ const MOVEMENT_STEP = 5;
 const PADDING = 20;
 const WIDTH = 800;
 const HEIGHT = 500;
-const PADDLE_WIDTH = 10;
-const PADDLE_HEIGHT = 50;
+const PLAYER_WIDTH = 10;
+const PLAYER_HEIGHT = 50;
 
 class UltimateGame extends GameEngine {
   constructor(options) {
@@ -25,13 +25,13 @@ class UltimateGame extends GameEngine {
 
     this.on('objectAdded', (object) => {
       if (object.id == 1 && object.class == Player) {
-        this.paddle1 = object;
+        this.player1 = object;
       }
       else if (object.id == 2 && object.class == Player) {
-        this.paddle2 = object;
+        this.player2 = object;
       }
       else if (object.class == Disc) {
-        this.ball = object;
+        this.disc = object;
       }
       else {
         throw new Error('Unexpected object was added!');
@@ -58,7 +58,7 @@ class UltimateGame extends GameEngine {
   processInput(inputData, playerId) {
     super.processInput(inputData, playerId);
 
-    // get the player paddle tied to the player socket
+    // get the player tied to the player socket
     const player = this.world.getPlayerObject(playerId);
     if (player) {
       if (
@@ -69,19 +69,19 @@ class UltimateGame extends GameEngine {
       }
       else if (
         inputData.input === 'down'
-        && player.position.y < HEIGHT - PADDLE_HEIGHT
+        && player.position.y < HEIGHT - PLAYER_HEIGHT
       ) {
         player.position.y += MOVEMENT_STEP;
       }
       else if (
         inputData.input === 'right'
-        && player.position.x < WIDTH - PADDLE_WIDTH
+        && player.position.x < WIDTH - PLAYER_WIDTH
       ) {
         player.position.x += MOVEMENT_STEP;
       }
       else if (
         inputData.input === 'left'
-        && player.position.x > PADDLE_WIDTH
+        && player.position.x > PLAYER_WIDTH
       ) {
         player.position.x -= MOVEMENT_STEP;
       }
@@ -90,55 +90,55 @@ class UltimateGame extends GameEngine {
 
 
   postStepHandleDisc() {
-    if (!this.ball) {
+    if (!this.disc) {
       return;
     }
 
     // CHECK LEFT EDGE:
     if (
-      this.ball.position.x <= PADDING + PADDLE_WIDTH
-      && this.ball.position.y >= this.paddle1.y
-      && this.ball.position.y <= this.paddle1.position.y + PADDLE_HEIGHT
-      && this.ball.velocity.x < 0
+      this.disc.position.x <= PADDING + PLAYER_WIDTH
+      && this.disc.position.y >= this.player1.y
+      && this.disc.position.y <= this.player1.position.y + PLAYER_HEIGHT
+      && this.disc.velocity.x < 0
     ) {
-      // ball moving left hit player 1 paddle
-      this.ball.velocity.x *= -1;
-      this.ball.position.x = PADDING + PADDLE_WIDTH + 1;
+      // disc moving left hit player 1 player
+      this.disc.velocity.x *= -1;
+      this.disc.position.x = PADDING + PLAYER_WIDTH + 1;
     }
-    else if (this.ball.position.x <= 0) {
-      // ball hit left wall
-      this.ball.velocity.x *= -1;
-      this.ball.position.x = 0;
+    else if (this.disc.position.x <= 0) {
+      // disc hit left wall
+      this.disc.velocity.x *= -1;
+      this.disc.position.x = 0;
       console.log(`player 2 scored`);
     }
 
     // CHECK RIGHT EDGE:
     if (
-      this.ball.position.x >= WIDTH - PADDING - PADDLE_WIDTH
-      && this.ball.position.y >= this.paddle2.position.y
-      && this.ball.position.y <= this.paddle2.position.y + PADDLE_HEIGHT
-      && this.ball.velocity.x > 0
+      this.disc.position.x >= WIDTH - PADDING - PLAYER_WIDTH
+      && this.disc.position.y >= this.player2.position.y
+      && this.disc.position.y <= this.player2.position.y + PLAYER_HEIGHT
+      && this.disc.velocity.x > 0
     ) {
-      // ball moving right hits player 2 paddle
-      this.ball.velocity.x *= -1;
-      this.ball.position.x = WIDTH - PADDING - PADDLE_WIDTH - 1;
+      // disc moving right hits player 2 player
+      this.disc.velocity.x *= -1;
+      this.disc.position.x = WIDTH - PADDING - PLAYER_WIDTH - 1;
     }
-    else if (this.ball.position.x >= WIDTH ) {
-      // ball hit right wall
-      this.ball.velocity.x *= -1;
-      this.ball.position.x = WIDTH - 1;
+    else if (this.disc.position.x >= WIDTH ) {
+      // disc hit right wall
+      this.disc.velocity.x *= -1;
+      this.disc.position.x = WIDTH - 1;
       console.log(`player 1 scored`);
     }
 
-    // ball hits top
-    if (this.ball.position.y <= 0) {
-      this.ball.position.y = 1;
-      this.ball.velocity.y *= -1;
+    // disc hits top
+    if (this.disc.position.y <= 0) {
+      this.disc.position.y = 1;
+      this.disc.velocity.y *= -1;
     }
-    else if (this.ball.position.y >= HEIGHT) {
-      // ball hits bottom
-      this.ball.position.y = HEIGHT - 1;
-      this.ball.velocity.y *= -1;
+    else if (this.disc.position.y >= HEIGHT) {
+      // disc hits bottom
+      this.disc.position.y = HEIGHT - 1;
+      this.disc.velocity.y *= -1;
     }
   }
 

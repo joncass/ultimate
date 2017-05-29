@@ -12,7 +12,7 @@ class Player extends DynamicObject {
 
   onAddToWorld(gameEngine) {
     if (gameEngine.renderer) {
-      gameEngine.renderer.addSprite(this, 'paddle');
+      gameEngine.renderer.addSprite(this, 'player');
     }
   }
 }
