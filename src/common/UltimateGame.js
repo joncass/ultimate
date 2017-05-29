@@ -5,11 +5,11 @@ const GameEngine = require('lance-gg').GameEngine;
 const Player = require('./Player');
 const Disc = require('./Disc');
 const MOVEMENT_STEP = 5;
-const PADDING = 20;
+const PADDING = 10;
 const WIDTH = 800;
 const HEIGHT = 500;
-const PLAYER_WIDTH = 10;
-const PLAYER_HEIGHT = 50;
+const PLAYER_WIDTH = 16;
+const PLAYER_HEIGHT = 16;
 
 class UltimateGame extends GameEngine {
   constructor(options) {
