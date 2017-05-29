@@ -60,7 +60,19 @@ class UltimateGame extends GameEngine {
 
     // get the player tied to the player socket
     const player = this.world.getPlayerObject(playerId);
-    if (player && !player.hasDisc) {
+    if (!player) {
+      return;
+    }
+
+    if (player.hasDisc) {
+      if (
+        inputData.input === 'space'
+      ) {
+        this.disc.velocity.x = 2;
+        player.hasDisc = false;
+      }
+    }
+    else {
       if (
         inputData.input === 'up'
         && player.position.y > 0
